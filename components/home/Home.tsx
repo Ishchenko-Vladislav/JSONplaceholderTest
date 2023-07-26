@@ -3,9 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { DropDown } from "./dropdown/DropDown";
 import { Posts } from "./posts/Posts";
 
-interface Props {}
-
-export const Home: FC<Props> = () => {
+export const Home: FC = () => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [userId, setUserId] = useState<number>(0);
 

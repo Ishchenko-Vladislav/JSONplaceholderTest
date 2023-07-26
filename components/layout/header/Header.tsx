@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { FC } from "react";
 import { Back } from "./back/Back";
-interface Props {}
 
-export const Header: FC<Props> = () => {
+export const Header: FC = () => {
   return (
-    <div className="h-10 max-w-screen-xl mx-auto items-center justify-between flex mb-4 w-full relative">
+    <header className="h-10 max-w-screen-xl mx-auto items-center justify-between flex mb-4 w-full relative">
       <Back />
       <Link
         href="/"
@@ -13,6 +12,6 @@ export const Header: FC<Props> = () => {
       >
         JSONPlaceholder
       </Link>
-    </div>
+    </header>
   );
 };

@@ -2,9 +2,8 @@
 import { FC } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
-interface Props {}
 
-export const Back: FC<Props> = () => {
+export const Back: FC = () => {
   const pathname = usePathname();
   const route = useRouter();
 
