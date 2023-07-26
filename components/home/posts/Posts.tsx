@@ -1,34 +1,37 @@
 "use client";
+import { Loader } from "@/ui/loader/Loader";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 interface Props {
-  userId: number;
+  user: IUser | null;
 }
 
-export const Posts: FC<Props> = ({ userId }) => {
+export const Posts: FC<Props> = ({ user }) => {
   const [posts, setPosts] = useState<IPosts[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [initialLoading, setInitialLoading] = useState<boolean>(true);
 
-  const getUsers = async () => {
+  const getPosts = async () => {
     setLoading(true);
     try {
-      const u = `https://jsonplaceholder.typicode.com/posts`;
-      const url = userId !== 0 ? u.concat("?userId=" + userId) : u;
+      let url = `https://jsonplaceholder.typicode.com/posts`;
+      if (user) url += `?userId=${user.id}`;
       const res = await fetch(url).then((res) => res.json());
       setPosts(res);
     } catch (error: any) {
       console.log(error.message);
     } finally {
       setLoading(false);
+      setInitialLoading(false);
     }
   };
 
   useEffect(() => {
-    getUsers();
-  }, [userId]);
+    getPosts();
+  }, [user]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading || initialLoading) return <Loader />;
   return (
     <div className="flex flex-col gap-3 ">
       {posts &&
